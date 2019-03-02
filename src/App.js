@@ -11,6 +11,7 @@ export default function App() {
     Auth.login(username, password)
       .then(res => {
         if (res) {
+          console.log(res);
           setToken(true);
         }
       })
@@ -19,8 +20,20 @@ export default function App() {
       });
   };
 
-  if (token && localStorage.id_token) {
-    container = <p>In</p>;
+  if (token) {
+    container = (
+      <div>
+        <p>In</p>
+        <button
+          onClick={() => {
+            setToken(false);
+            Auth.logout();
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    );
   } else {
     container = <p>Out</p>;
   }
